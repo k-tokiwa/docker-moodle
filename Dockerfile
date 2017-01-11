@@ -1,5 +1,5 @@
 # Dockerfile for moodle instance. more dockerish version of https://github.com/sergiogomez/docker-moodle
-FROM ubuntu:14.04
+FROM CENTOS7
 MAINTAINER Jon Auer <jda@coldshore.com>
 
 VOLUME ["/var/moodledata"]
@@ -18,7 +18,7 @@ ENV DEBIAN_FRONTEND noninteractive
 #ENV MYSQL_USER moodle
 #ENV MYSQL_PASSWORD moodle
 #ENV MYSQL_DB moodle
-ENV MOODLE_URL http://192.168.59.103
+ENV MOODLE_URL https://sample.com
 
 # ADD http://downloads.sourceforge.net/project/moodle/Moodle/stable27/moodle-latest-27.tgz /tmp/moodle-latest-27.tgz
 ADD ./foreground.sh /etc/apache2/foreground.sh
@@ -28,7 +28,7 @@ RUN apt-get update && \
 		php5-gd libapache2-mod-php5 postfix wget supervisor php5-pgsql curl libcurl3 \
 		libcurl3-dev php5-curl php5-xmlrpc php5-intl php5-mysql git-core && \
 	cd /tmp && \
-	git clone -b MOODLE_29_STABLE git://git.moodle.org/moodle.git --depth=1 && \
+	git clone -b MOODLE_30_STABLE git://git.moodle.org/moodle.git --depth=1 && \
 	mv /tmp/moodle/* /var/www/html/ && \
 	rm /var/www/html/index.html && \
 	chown -R www-data:www-data /var/www/html && \
